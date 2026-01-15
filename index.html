@@ -5,48 +5,336 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wedding Party</title>
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; line-height: 1.5; }
-    nav a { margin-right: 12px; }
-    .card { padding: 16px; border: 1px solid #ddd; border-radius: 12px; margin: 16px 0; }
-    .muted { color: #555; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      background-color: #ffffff;
+      min-height: 100vh;
+    }
+    
+    header {
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+    
+    nav {
+      margin-top: 20px;
+    }
+    
+    nav a {
+      color: #1a1a1a;
+      text-decoration: none;
+      margin-right: 24px;
+      font-size: 15px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    
+    nav a:hover {
+      border-bottom-color: #1a1a1a;
+    }
+    
+    section {
+      margin-bottom: 40px;
+    }
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #1a1a1a;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+    
+    p {
+      margin-bottom: 12px;
+      color: #333;
+    }
+    
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .info-box {
+      background-color: #f8f8f8;
+      border-left: 3px solid #1a1a1a;
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+    
+    .timeline {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+    
+    .timeline li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 0;
+    }
+    
+    .timeline li:last-child {
+      border-bottom: none;
+    }
+    
+    .timeline-time {
+      font-weight: 600;
+      color: #1a1a1a;
+      display: inline-block;
+      min-width: 100px;
+    }
+    
+    .timeline-event {
+      color: #333;
+    }
+    
+    a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-decoration-color: #999;
+      text-underline-offset: 2px;
+    }
+    
+    a:hover {
+      text-decoration-color: #1a1a1a;
+    }
+    
+    .map-container {
+      margin: 20px 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .map-placeholder {
+      background-color: #f0f0f0;
+      padding: 60px 20px;
+      text-align: center;
+      color: #666;
+    }
+    
+    .rsvp-section {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    
+    .contact-section {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .muted {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .note {
+      background-color: #fff9e6;
+      border-left: 3px solid #d4a574;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 2px;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
+      
+      h1 {
+        font-size: 28px;
+      }
+      
+      nav a {
+        display: inline-block;
+        margin-right: 16px;
+        margin-bottom: 8px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Wedding Party</h1>
-  <p class="muted">A small celebration with close friends.</p>
+  <div class="container">
+    <header>
+      <h1>Wedding Party</h1>
+      <p class="subtitle">A small celebration with close friends.</p>
+      
+      <nav>
+        <a href="/">Home</a>
+        <a href="/donations/">Donations</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/photos/">Photos</a>
+        <a href="/updates/">Updates</a>
+      </nav>
+    </header>
 
-  <nav>
-    <a href="/donations/">Donations</a>
-    <a href="/faq/">FAQ</a>
-    <a href="/photos/">Photos</a>
-    <a href="/updates/">Updates</a>
-  </nav>
+    <main>
+      <section id="welcome">
+        <h2>Welcome</h2>
+        <p>We're so excited to celebrate with you! This page has everything you need to know about our wedding party.</p>
+      </section>
 
-  <div class="card">
-    <h2>When</h2>
-    <p><strong>Date:</strong> TBD<br><strong>Time:</strong> TBD</p>
+      <section id="when">
+        <h2>When</h2>
+        <p><strong>Date:</strong> TBD</p>
+        <p><strong>Time:</strong> TBD</p>
+      </section>
+
+      <section id="where">
+        <h2>Where</h2>
+        <p><strong>Venue:</strong> TBD</p>
+        <p><strong>Address:</strong> TBD</p>
+        
+        <div class="map-container">
+          <div class="map-placeholder">
+            Map will be embedded here once venue is confirmed
+          </div>
+        </div>
+      </section>
+
+      <section id="plan">
+        <h2>The Plan</h2>
+        <ul class="timeline">
+          <li>
+            <span class="timeline-time">TBD</span>
+            <span class="timeline-event">Arrival window</span>
+          </li>
+          <li>
+            <span class="timeline-time">TBD</span>
+            <span class="timeline-event">Food service</span>
+          </li>
+          <li>
+            <span class="timeline-time">TBD</span>
+            <span class="timeline-event">Speeches & toasts</span>
+          </li>
+          <li>
+            <span class="timeline-time">TBD</span>
+            <span class="timeline-event">After-party</span>
+          </li>
+          <li>
+            <span class="timeline-time">TBD</span>
+            <span class="timeline-event">End time</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="dress-code">
+        <h2>Dress Code</h2>
+        <p>Come as you are! We want you to be comfortable and feel like yourself.</p>
+      </section>
+
+      <section id="food-drinks">
+        <h2>Food & Drinks</h2>
+        <h3>Menu</h3>
+        <p>TBD</p>
+        
+        <h3>Dietary Options</h3>
+        <ul>
+          <li>Vegan options available</li>
+          <li>Please let us know about any allergies or dietary restrictions in your RSVP</li>
+        </ul>
+        
+        <h3>Drinks</h3>
+        <p>TBD</p>
+      </section>
+
+      <section id="getting-there">
+        <h2>Getting There</h2>
+        <h3>Public Transport</h3>
+        <p>TBD</p>
+        
+        <h3>Parking</h3>
+        <p>TBD</p>
+        
+        <h3>Taxi / Ride Share</h3>
+        <p>Nearest pickup point: TBD</p>
+      </section>
+
+      <section id="rsvp">
+        <h2>RSVP</h2>
+        <div class="rsvp-section">
+          <p><strong>Please let us know if you can make it!</strong></p>
+          <p>Contact us via the methods below, or use the WhatsApp group link if you have it.</p>
+        </div>
+      </section>
+
+      <section id="gifts">
+        <h2>Gifts & Donations</h2>
+        <div class="note">
+          <p><strong>No gifts expected!</strong> Your presence is the best present.</p>
+          <p>If you'd like to give something, please consider donating to one of the causes we care about. See our <a href="/donations/">Donations page</a> for details.</p>
+        </div>
+      </section>
+
+      <section id="credits">
+        <h2>Credits</h2>
+        <p>Big thanks to our nearby helpers: <em>(names TBD)</em></p>
+      </section>
+
+      <section class="contact-section" id="contact">
+        <h2>Contact</h2>
+        <p>Questions? Reach out to us:</p>
+        <ul>
+          <li>WhatsApp group: <em>(link TBD)</em></li>
+          <li>Email: <em>(contact TBD)</em></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #e0e0e0; color: #666; font-size: 14px;">
+      <p class="muted">Private attendee links are shared individually.</p>
+    </footer>
   </div>
-
-  <div class="card">
-    <h2>Where</h2>
-    <p><strong>Venue:</strong> TBD<br><strong>Address:</strong> TBD</p>
-    <p><a href="https://www.google.com/maps" target="_blank" rel="noreferrer">Open map</a></p>
-  </div>
-
-  <div class="card">
-    <h2>Plan</h2>
-    <ul>
-      <li>Arrival window: TBD</li>
-      <li>Food: TBD</li>
-      <li>Hangout: TBD</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>Credits</h2>
-    <p>Big thanks to our nearby helpers: <em>(names TBD)</em></p>
-  </div>
-
-  <p class="muted">Private attendee links are shared individually.</p>
 </body>
 </html>
