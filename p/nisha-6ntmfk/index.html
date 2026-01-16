@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nisha's Page - Wedding Party</title>
+  <link rel="icon" type="image/jpeg" href="../../image3.jpeg">
+  <link rel="shortcut icon" type="image/jpeg" href="../../image3.jpeg">
+  <link rel="apple-touch-icon" href="../../image3.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+      background-color: #fafafa;
+      color: #2c2c2c;
+      line-height: 1.75;
+      padding: 0;
+      font-size: 18px;
+    }
+    
+    .header-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      padding: 0;
+      object-fit: cover;
+      max-height: 300px;
+      object-position: center center;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 64px;
+      background-color: #ffffff;
+      min-height: 100vh;
+    }
+    
+    header {
+      margin-bottom: 56px;
+    }
+    
+    h1 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 17px;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    
+    nav {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    
+    nav a {
+      color: #2c2c2c;
+      text-decoration: none;
+      margin-right: 24px;
+      font-size: 18px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    nav a:hover {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+    
+    main {
+      margin-top: 40px;
+    }
+    
+    section {
+      margin-bottom: 56px;
+    }
+    
+    h2 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      margin-top: 8px;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+    
+    h3 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: #2c2c2c;
+      letter-spacing: -0.3px;
+    }
+    
+    p {
+      margin-bottom: 20px;
+      color: #2c2c2c;
+      font-size: 18px;
+    }
+    
+    ul, ol {
+      margin-left: 28px;
+      margin-bottom: 24px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+      color: #2c2c2c;
+      font-size: 18px;
+    }
+    
+    .donation-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .donation-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    
+    .timeline {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+    
+    .timeline li {
+      padding: 10px 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .timeline-time {
+      font-weight: 600;
+      color: #1a1a1a;
+      display: inline-block;
+      min-width: 140px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    
+    .timeline-event {
+      color: #2c2c2c;
+    }
+    
+    a {
+      color: #2c2c2c;
+      text-decoration: underline;
+      text-decoration-color: #999;
+      text-underline-offset: 2px;
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    
+    a:hover {
+      color: #1a1a1a;
+      text-decoration-color: #1a1a1a;
+    }
+    
+    strong {
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+    
+    em {
+      font-style: italic;
+      color: #4a4a4a;
+    }
+    
+    .muted {
+      color: #777;
+      font-size: 15px;
+    }
+    
+    hr {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 56px 0;
+    }
+    
+    footer {
+      margin-top: 96px;
+      padding-top: 32px;
+      border-top: 1px solid #e8e8e8;
+      color: #777;
+      font-size: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 32px 24px;
+        max-width: 100%;
+      }
+      
+      h1 {
+        font-size: 36px;
+      }
+      
+      h2 {
+        font-size: 28px;
+      }
+      
+      body {
+        font-size: 17px;
+      }
+      
+      p, li {
+        font-size: 17px;
+      }
+      
+      nav a {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+    }
+  
+  </style>
+</head>
+<body>
+  <img src="../../image3.jpeg" alt="Ajay and JK" class="header-image">
+  <div class="container">
+    <header>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+      <h1>Hi Nisha!</h1>
+      <p class="subtitle">Your personal page for the wedding party</p>
+    </header>
+    <main>
+      <section id="welcome">
+        <p>We are so excited to have you join us for our celebration! This page has some special information just for you.</p>
+      </section>
+
+      <hr>
+
+      <section id="accommodation">
+        <h2>Accommodation</h2>
+        <p><em>Accommodation details will be added here if you are coming from outside Darmstadt.</em></p>
+      </section>
+
+      <hr>
+
+      <section id="directions">
+        <h2>Getting to the Venue</h2>
+        <p><em>Directions from your accommodation will be added here.</em></p>
+      </section>
+
+      <hr>
+
+      <section id="personal-note">
+        <h2>A Note from Us</h2>
+        <p><em>A personal note from Ajay and JK will be added here.</em></p>
+      </section>
+
+      <hr>
+
+      <section id="your-people">
+        <h2>Your People</h2>
+        <p>Here are some people we think you will vibe with:</p>
+        <ul>
+          <li><em>Connections will be added here</em></li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section id="social-quest">
+        <h2>Social Quest</h2>
+        <p>Here are some fun things to discover about other guests:</p>
+        <ul>
+          <li>Who has lived in more than 3 countries?</li>
+          <li>Who has the most unusual hobby?</li>
+          <li>Who can recommend a great book they actually finished?</li>
+          <li>Who has an interesting travel story to share?</li>
+          <li>Who shares a common interest with you?</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section id="mini-missions">
+        <h2>Mini-Missions</h2>
+        <p>Some fun ways to connect with others at the party:</p>
+        <ul>
+          <li>Find someone who has visited a place you want to go</li>
+          <li>Share a favorite memory with someone new</li>
+          <li>Discover a common interest with at least one person</li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p class="muted"><a href="/">Back to main party page</a></p>
+    </footer>
+  </div>
+</body>
+</html>
