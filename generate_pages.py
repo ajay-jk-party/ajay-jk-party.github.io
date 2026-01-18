@@ -24,12 +24,14 @@ def render_template(template, attendee):
     """Simple template rendering (replaces {{ name }}, {{ accommodation }}, and {{ accommodation_message }} with actual values)."""
     rendered = template.replace('{{ name }}', attendee['name'])
     
-    # Handle accommodation - check for custom message first, then accommodation, then default
+    # Handle accommodation section - check for custom message first, then accommodation, then default
+    accommodation_section_pattern = r'{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}'
+    
     if 'accommodation_message' in attendee and attendee['accommodation_message']:
         # Custom accommodation message
         accommodation_text = f"<p>{attendee['accommodation_message']}</p>"
         rendered = re.sub(
-            r'{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}',
+            accommodation_section_pattern,
             accommodation_text,
             rendered,
             flags=re.DOTALL
@@ -37,44 +39,19 @@ def render_template(template, attendee):
     elif 'accommodation' in attendee and attendee['accommodation']:
         # Standard accommodation with host
         accommodation_text = f"<p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
-        # Replace the entire if/elif/else block
         rendered = re.sub(
-            r'{% if accommodation_message %}.*?{% elif accommodation %}',
-            '',
-            rendered,
-            flags=re.DOTALL
-        )
-        rendered = re.sub(
-            r'{% else %}.*?{% endif %}',
-            '',
-            rendered,
-            flags=re.DOTALL
-        )
-        # Now insert the accommodation text where the elif block was
-        rendered = re.sub(
-            r'<p>Hey {{ name }}!.*?</p>\s*<p>Please let us know.*?</p>',
+            accommodation_section_pattern,
             accommodation_text,
             rendered,
             flags=re.DOTALL
         )
     else:
         # Default coming soon message
-        # Remove all if/elif blocks and keep else
         rendered = re.sub(
-            r'{% if accommodation_message %}.*?{% elif accommodation %}.*?<div class="coming-soon">',
-            '<div class="coming-soon">',
+            accommodation_section_pattern,
+            '<div class="coming-soon">Coming soon: Accommodation details will be added here if you are coming from outside Darmstadt.</div>',
             rendered,
             flags=re.DOTALL
-        )
-        rendered = re.sub(
-            r'{% else %}\s*',
-            '',
-            rendered
-        )
-        rendered = re.sub(
-            r'{% endif %}',
-            '',
-            rendered
         )
     
     return rendered
@@ -107,4 +84,3 @@ def generate_pages():
 
 if __name__ == '__main__':
     generate_pages()
-
