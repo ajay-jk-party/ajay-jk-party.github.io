@@ -233,6 +233,7 @@
 
       <hr>
 
+      {% if accommodation_message or accommodation or name == "Kathy" %}
       <section id="accommodation">
         <h2>Accommodation</h2>
         {% if accommodation_message %}
@@ -246,6 +247,7 @@
       </section>
 
       <hr>
+      {% endif %}
 
       <section id="personal-note">
         <h2>A Note from Us</h2>

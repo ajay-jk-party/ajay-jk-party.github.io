@@ -24,35 +24,56 @@ def render_template(template, attendee):
     """Simple template rendering (replaces {{ name }}, {{ accommodation }}, and {{ accommodation_message }} with actual values)."""
     rendered = template.replace('{{ name }}', attendee['name'])
     
-    # Handle accommodation section - check for custom message first, then accommodation, then default
-    accommodation_section_pattern = r'{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}'
+    # Check if accommodation section should be shown
+    has_accommodation = ('accommodation_message' in attendee and attendee['accommodation_message']) or \
+                       ('accommodation' in attendee and attendee['accommodation']) or \
+                       attendee['name'] == 'Kathy'
     
-    if 'accommodation_message' in attendee and attendee['accommodation_message']:
-        # Custom accommodation message
-        accommodation_text = f"<p>{attendee['accommodation_message']}</p>"
+    if not has_accommodation:
+        # Remove entire accommodation section including the hr before it
         rendered = re.sub(
-            accommodation_section_pattern,
-            accommodation_text,
+            r'      {% if accommodation_message.*?{% endif %}\s*',
+            '',
             rendered,
             flags=re.DOTALL
         )
-    elif 'accommodation' in attendee and attendee['accommodation']:
-        # Standard accommodation with host
-        accommodation_text = f"<p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
         rendered = re.sub(
-            accommodation_section_pattern,
-            accommodation_text,
+            r'      <hr>\s*{% endif %}',
+            '',
             rendered,
             flags=re.DOTALL
         )
     else:
-        # Default coming soon message
-        rendered = re.sub(
-            accommodation_section_pattern,
-            '<div class="coming-soon">Coming soon: Accommodation details will be added here if you are coming from outside Darmstadt.</div>',
-            rendered,
-            flags=re.DOTALL
-        )
+        # Handle accommodation section - check for custom message first, then accommodation, then default
+        accommodation_section_pattern = r'{% if accommodation_message or accommodation or name == "Kathy" %}.*?{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}\s*</section>\s*<hr>\s*{% endif %}'
+        
+        if 'accommodation_message' in attendee and attendee['accommodation_message']:
+            # Custom accommodation message
+            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <p>{attendee['accommodation_message']}</p>\n      </section>\n\n      <hr>"
+            rendered = re.sub(
+                accommodation_section_pattern,
+                accommodation_text,
+                rendered,
+                flags=re.DOTALL
+            )
+        elif 'accommodation' in attendee and attendee['accommodation']:
+            # Standard accommodation with host
+            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>\n      </section>\n\n      <hr>"
+            rendered = re.sub(
+                accommodation_section_pattern,
+                accommodation_text,
+                rendered,
+                flags=re.DOTALL
+            )
+        else:
+            # Default coming soon message (for Kathy)
+            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <div class=\"coming-soon\">Coming soon: Accommodation details will be added here if you are coming from outside Darmstadt.</div>\n      </section>\n\n      <hr>"
+            rendered = re.sub(
+                accommodation_section_pattern,
+                accommodation_text,
+                rendered,
+                flags=re.DOTALL
+            )
     
     return rendered
 
