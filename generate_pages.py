@@ -21,8 +21,38 @@ def load_attendees():
         return json.load(f)['attendees']
 
 def render_template(template, attendee):
-    """Simple template rendering (replaces {{ name }} with actual name)."""
+    """Simple template rendering (replaces {{ name }} and {{ accommodation }} with actual values)."""
     rendered = template.replace('{{ name }}', attendee['name'])
+    
+    # Handle accommodation
+    if 'accommodation' in attendee and attendee['accommodation']:
+        # Replace the accommodation section
+        accommodation_text = f"<p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned you at: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
+        rendered = re.sub(
+            r'{% if accommodation %}.*?{% endif %}',
+            accommodation_text,
+            rendered,
+            flags=re.DOTALL
+        )
+    else:
+        # Remove the if block and keep the else part
+        rendered = re.sub(
+            r'{% if accommodation %}.*?<div class="coming-soon">',
+            '<div class="coming-soon">',
+            rendered,
+            flags=re.DOTALL
+        )
+        rendered = re.sub(
+            r'{% else %}\s*',
+            '',
+            rendered
+        )
+        rendered = re.sub(
+            r'{% endif %}',
+            '',
+            rendered
+        )
+    
     return rendered
 
 def generate_pages():
