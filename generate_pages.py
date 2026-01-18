@@ -27,7 +27,7 @@ def render_template(template, attendee):
     # Handle accommodation
     if 'accommodation' in attendee and attendee['accommodation']:
         # Replace the accommodation section
-        accommodation_text = f"<p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned you at: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
+        accommodation_text = f"<p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
         rendered = re.sub(
             r'{% if accommodation %}.*?{% endif %}',
             accommodation_text,
