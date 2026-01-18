@@ -29,11 +29,11 @@ def render_template(template, attendee):
                        ('accommodation' in attendee and attendee['accommodation']) or \
                        attendee['name'] == 'Kathy'
     
-    # Pattern to match the entire accommodation section block including the hr before it
-    accommodation_block_pattern = r'      <hr>\s*{% if accommodation_message or accommodation or name == "Kathy" %}.*?{% endif %}\s*'
+    # Pattern to match the entire accommodation section block including the hr before and after
+    accommodation_block_pattern = r'      <hr>\s*{% if accommodation_message or accommodation or name == "Kathy" %}.*?<hr>\s*{% endif %}\s*'
     
     if not has_accommodation:
-        # Remove entire accommodation section including the hr before it
+        # Remove entire accommodation section including the hr before and after it
         rendered = re.sub(
             accommodation_block_pattern,
             '',
@@ -61,7 +61,7 @@ def render_template(template, attendee):
             flags=re.DOTALL
         )
         
-        # Remove the outer if condition, keep the section
+        # Remove the outer if condition, keep the section and hr
         rendered = re.sub(
             r'      {% if accommodation_message or accommodation or name == "Kathy" %}',
             '',
