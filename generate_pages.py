@@ -33,12 +33,18 @@ def render_template(template, attendee):
     accommodation_block_pattern = r'      <hr>\s*{% if accommodation_message or accommodation or name == "Kathy" %}.*?<hr>\s*{% endif %}\s*'
     
     if not has_accommodation:
-        # Remove entire accommodation section including the hr before and after it
+        # Remove entire accommodation section including the hr before and after it, but keep one hr before next section
         rendered = re.sub(
             accommodation_block_pattern,
             '',
             rendered,
             flags=re.DOTALL
+        )
+        # Ensure there's an hr before the next section if it was removed
+        rendered = re.sub(
+            r'      </section>\s*<section id="personal-note">',
+            '      </section>\n\n      <hr>\n\n      <section id="personal-note">',
+            rendered
         )
     else:
         # Handle accommodation section content
