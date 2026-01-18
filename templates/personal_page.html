@@ -235,7 +235,9 @@
 
       <section id="accommodation">
         <h2>Accommodation</h2>
-        {% if accommodation %}
+        {% if accommodation_message %}
+        <p>{{ accommodation_message }}</p>
+        {% elif accommodation %}
         <p>Hey {{ name }}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{{ accommodation }}</strong></p>
         <p>Please let us know if this is okay for you.</p>
         {% else %}
