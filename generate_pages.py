@@ -29,51 +29,49 @@ def render_template(template, attendee):
                        ('accommodation' in attendee and attendee['accommodation']) or \
                        attendee['name'] == 'Kathy'
     
+    # Pattern to match the entire accommodation section block including the hr before it
+    accommodation_block_pattern = r'      <hr>\s*{% if accommodation_message or accommodation or name == "Kathy" %}.*?{% endif %}\s*'
+    
     if not has_accommodation:
         # Remove entire accommodation section including the hr before it
         rendered = re.sub(
-            r'      {% if accommodation_message.*?{% endif %}\s*',
-            '',
-            rendered,
-            flags=re.DOTALL
-        )
-        rendered = re.sub(
-            r'      <hr>\s*{% endif %}',
+            accommodation_block_pattern,
             '',
             rendered,
             flags=re.DOTALL
         )
     else:
-        # Handle accommodation section - check for custom message first, then accommodation, then default
-        accommodation_section_pattern = r'{% if accommodation_message or accommodation or name == "Kathy" %}.*?{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}\s*</section>\s*<hr>\s*{% endif %}'
-        
+        # Handle accommodation section content
         if 'accommodation_message' in attendee and attendee['accommodation_message']:
             # Custom accommodation message
-            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <p>{attendee['accommodation_message']}</p>\n      </section>\n\n      <hr>"
-            rendered = re.sub(
-                accommodation_section_pattern,
-                accommodation_text,
-                rendered,
-                flags=re.DOTALL
-            )
+            accommodation_content = f"        <p>{attendee['accommodation_message']}</p>"
         elif 'accommodation' in attendee and attendee['accommodation']:
             # Standard accommodation with host
-            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>\n      </section>\n\n      <hr>"
-            rendered = re.sub(
-                accommodation_section_pattern,
-                accommodation_text,
-                rendered,
-                flags=re.DOTALL
-            )
+            accommodation_content = f"        <p>Hey {attendee['name']}! Thanks again for joining, we look forward to having you here. You should have received a personal message from us regarding your accommodation. We have planned your stay with: <strong>{attendee['accommodation']}</strong></p>\n        <p>Please let us know if this is okay for you.</p>"
         else:
             # Default coming soon message (for Kathy)
-            accommodation_text = f"      <section id=\"accommodation\">\n        <h2>Accommodation</h2>\n        <div class=\"coming-soon\">Coming soon: Accommodation details will be added here if you are coming from outside Darmstadt.</div>\n      </section>\n\n      <hr>"
-            rendered = re.sub(
-                accommodation_section_pattern,
-                accommodation_text,
-                rendered,
-                flags=re.DOTALL
-            )
+            accommodation_content = '        <div class="coming-soon">Coming soon: Accommodation details will be added here if you are coming from outside Darmstadt.</div>'
+        
+        # Replace the if/elif/else block inside the section
+        inner_pattern = r'{% if accommodation_message %}.*?{% elif accommodation %}.*?{% else %}.*?{% endif %}'
+        rendered = re.sub(
+            inner_pattern,
+            accommodation_content,
+            rendered,
+            flags=re.DOTALL
+        )
+        
+        # Remove the outer if condition, keep the section
+        rendered = re.sub(
+            r'      {% if accommodation_message or accommodation or name == "Kathy" %}',
+            '',
+            rendered
+        )
+        rendered = re.sub(
+            r'      {% endif %}',
+            '',
+            rendered
+        )
     
     return rendered
 
